@@ -1,3 +1,4 @@
+import 'package:donut_app/utils/donut_tile.dart';
 import 'package:flutter/material.dart';
 
 class DonutTab extends StatelessWidget {
@@ -9,24 +10,24 @@ class DonutTab extends StatelessWidget {
       'Chocolate',
       '100',
       Colors.brown,
-      "lib/images/chocolate_donut.png",
+      "assets/images/chocolate_donut.png",
       'Starbucks',
     ],
     [
       'Strawberry',
       '89',
       Colors.red,
-      "lib/images/strawberry_donut.png",
+      "assets/images/strawberry_donut.png",
       'Krispy Kreme',
     ],
     [
       'Ice Cream',
       '95',
       Colors.blue,
-      "lib/images/icecream_donut.png",
+      "assets/images/icecream_donut.png",
       "Dunkin' Donuts",
     ],
-    ['Grape', '70', Colors.purple, "lib/images/grape_donut.png", 'Oxxo'],
+    ['Grape', '70', Colors.purple, "assets/images/grape_donut.png", 'Oxxo'],
   ];
 
   @override
@@ -35,20 +36,22 @@ class DonutTab extends StatelessWidget {
       //GirdDelegate, se encarga de Acomodar/distribuir elementos dentro del GRID
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         //Tamaño de cada columna relacion 1:1.5 , 1 vale la mitad de 1 y medio
-        childAspectRatio: 1 / 1.5,
+        childAspectRatio: 1 / 1.7,
         //Cantidad de Columnas
         crossAxisCount: 2,
       ),
       //Cantidad de productos
       itemCount: donutOnSale.length,
       //Lo que se va a construir
-      itemBuilder: DonutTile(
-        donutFlavor: donutOnSale[index][0],
-        donutPrice: donutOnSale[index][1],
-        donutColor: donutOnSale[index][2],
-        donutImagePath: donutOnSale[index][3],
-        donutProvider: donutOnSale[index][4],
-      ),
+      itemBuilder: (context, index) {
+        return DonutTile(
+          donutFlavor: donutOnSale[index][0],
+          donutPrice: donutOnSale[index][1],
+          donutColor: donutOnSale[index][2],
+          donutImagePath: donutOnSale[index][3],
+          donutProvider: donutOnSale[index][4],
+        );
+      },
     );
   }
 }
