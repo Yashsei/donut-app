@@ -7,27 +7,27 @@ class PancakeTab extends StatelessWidget {
   final List pancakeOnSale = [
     //donutFlavor, donutPrice, donutColor, donutImagePath, donutProvider
     [
-      'Pancake',
-      '100',
+      'Cherry Pancake',
+      '70',
       Colors.brown,
-      "assets/images/chocolate_donut.png",
-      'Starbucks',
+      "assets/images/cherry.png",
+      'Donkin Donuts',
     ],
     [
-      'Strawberry',
-      '89',
+      'Nutella Tower',
+      '95',
       Colors.red,
-      "assets/images/strawberry_donut.png",
+      "assets/images/pancaketower.gif",
       'Krispy Kreme',
     ],
+    ['Pancake', '95', Colors.blue, "assets/images/Pancake.png", "Tim Hortons"],
     [
-      'Ice Cream',
-      '95',
-      Colors.blue,
-      "assets/images/icecream_donut.png",
-      "Dunkin' Donuts",
+      'Pancake Tower',
+      '70',
+      Colors.purple,
+      "assets/images/pancaketower.png",
+      'Oxxo',
     ],
-    ['Grape', '70', Colors.purple, "assets/images/grape_donut.png", 'Oxxo'],
   ];
 
   @override

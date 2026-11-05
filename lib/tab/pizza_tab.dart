@@ -6,28 +6,22 @@ class PizzaTab extends StatelessWidget {
 
   final List pizzaOnSale = [
     //donutFlavor, donutPrice, donutColor, donutImagePath, donutProvider
+    ['Pizza', '100', Colors.brown, "assets/images/pizzapep.png", 'Dominos'],
     [
-      'Pizza',
-      '100',
-      Colors.brown,
-      "assets/images/chocolate_donut.png",
-      'Starbucks',
-    ],
-    [
-      'Strawberry',
+      'Pizza Hawaiana',
       '89',
       Colors.red,
-      "assets/images/strawberry_donut.png",
-      'Krispy Kreme',
+      "assets/images/hawaiana.webp",
+      'Pizza Hut',
     ],
     [
-      'Ice Cream',
+      'Pizza Italiana',
       '95',
       Colors.blue,
-      "assets/images/icecream_donut.png",
-      "Dunkin' Donuts",
+      "assets/images/Italiana.webp",
+      "Don Queso",
     ],
-    ['Grape', '70', Colors.purple, "assets/images/grape_donut.png", 'Oxxo'],
+    ['Champizza', '70', Colors.purple, "assets/images/champ.png", 'Messinas'],
   ];
 
   @override

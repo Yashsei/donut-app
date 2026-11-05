@@ -7,27 +7,27 @@ class SmoothieTab extends StatelessWidget {
   final List smoothieOnSale = [
     //donutFlavor, donutPrice, donutColor, donutImagePath, donutProvider
     [
-      'Smoothie',
-      '90',
+      'Mango Explosion',
+      '85',
       Colors.brown,
-      "assets/images/chocolate_donut.png",
+      "assets/images/mango.png",
       'Starbucks',
     ],
+    ['Coco Power', '89', Colors.red, "assets/images/coco.png", 'Krispy Kreme'],
     [
-      'Strawberry',
-      '89',
-      Colors.red,
-      "assets/images/strawberry_donut.png",
-      'Krispy Kreme',
-    ],
-    [
-      'Ice Cream',
+      'Xtreme Chocolate',
       '95',
       Colors.blue,
-      "assets/images/icecream_donut.png",
+      "assets/images/choco.png",
       "Dunkin' Donuts",
     ],
-    ['Grape', '70', Colors.purple, "assets/images/grape_donut.png", 'Oxxo'],
+    [
+      'Jungle Fresh',
+      '70',
+      Colors.purple,
+      "assets/images/JungleFresh.png",
+      'Italian Coffe',
+    ],
   ];
 
   @override

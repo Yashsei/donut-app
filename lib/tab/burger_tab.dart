@@ -5,29 +5,28 @@ class BurgerTab extends StatelessWidget {
   BurgerTab({super.key});
 
   final List donutOnSale = [
-    //donutFlavor, donutPrice, donutColor, donutImagePath, donutProvider
     [
-      'Hamburguesa',
-      '100',
+      'Cheese Burger',
+      '120',
       Colors.brown,
-      "assets/images/chocolate_donut.png",
-      'Starbucks',
+      "assets/images/cheeseburger.png",
+      'Burger King',
     ],
     [
-      'Strawberry',
+      'Simple Burger',
       '89',
       Colors.red,
-      "assets/images/strawberry_donut.png",
-      'Krispy Kreme',
+      "assets/images/simpleburger.webp",
+      'Carls Junior',
     ],
     [
-      'Ice Cream',
+      'Cangre Burger',
       '95',
       Colors.blue,
-      "assets/images/icecream_donut.png",
-      "Dunkin' Donuts",
+      "assets/images/cangreburger.png",
+      "Crustaceo Cascarudo",
     ],
-    ['Grape', '70', Colors.purple, "assets/images/grape_donut.png", 'Oxxo'],
+    ['Big Mac', '70', Colors.purple, "assets/images/BigMac.png", 'MC Donalds'],
   ];
 
   @override
