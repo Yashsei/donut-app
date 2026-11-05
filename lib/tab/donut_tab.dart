@@ -36,7 +36,7 @@ class DonutTab extends StatelessWidget {
       //GirdDelegate, se encarga de Acomodar/distribuir elementos dentro del GRID
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         //Tamaño de cada columna relacion 1:1.5 , 1 vale la mitad de 1 y medio
-        childAspectRatio: 1 / 1.7,
+        childAspectRatio: 1 / 1.65,
         //Cantidad de Columnas
         crossAxisCount: 2,
       ),
