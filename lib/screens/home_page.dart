@@ -21,11 +21,11 @@ class _HomePageState extends State<HomePage> {
     //Burger Tab
     const MyTab(iconPath: 'assets/icons/burger.png', iconName: 'Burgers'),
     //Smoothies Tab
-    const MyTab(iconPath: 'assets/icons/smoothie.png', iconName: 'Smoothies'),
+    const MyTab(iconPath: 'assets/icons/pizza.png', iconName: 'Pizza'),
     //PanCakes Tab
     const MyTab(iconPath: 'assets/icons/pancakes.png', iconName: 'Pancakes'),
     //Pizza Tab
-    const MyTab(iconPath: 'assets/icons/pizza.png', iconName: 'Pizzas'),
+    const MyTab(iconPath: 'assets/icons/smoothie.png', iconName: 'Smoothie'),
   ];
 
   @override
