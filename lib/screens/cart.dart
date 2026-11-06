@@ -129,6 +129,36 @@ class Cart extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(height: 8),
+              Padding(
+                padding: EdgeInsetsGeometry.all(12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: cart.items.isEmpty
+                          ? null
+                          : () {
+                              cart.clearCart();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Su pedido a sido realizado'),
+                                  duration: const Duration(seconds: 3),
+                                ),
+                              );
+                              Navigator.pop(context);
+                            },
+                      child: const Text(
+                        'Order Now',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           );
         },

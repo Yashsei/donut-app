@@ -1,3 +1,4 @@
+import 'package:donut_app/screens/fav.dart';
 import 'package:donut_app/tab/burger_tab.dart';
 import 'package:donut_app/tab/donut_tab.dart';
 import 'package:donut_app/tab/pancake_tab.dart';
@@ -5,6 +6,7 @@ import 'package:donut_app/tab/pizza_tab.dart';
 import 'package:donut_app/tab/smoothie_tab.dart';
 import 'package:donut_app/screens/cart.dart';
 import 'package:donut_app/utils/cart_provider.dart';
+import 'package:donut_app/utils/fav_provider.dart';
 import 'package:donut_app/utils/my_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +41,25 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           //Icono de la izquierda
-          leading: Icon(Icons.menu),
+          leading: IconButton(
+            icon: Icon(
+              context.watch<FavProvider>().isFavorite('donut')
+                  ? Icons.menu
+                  : Icons.favorite_border_outlined,
+              color: Colors.pink[400],
+            ),
+            onPressed: () {
+              context.read<FavProvider>().toggleFavorite(
+                name: 'donutFlavor',
+                imagePath: 'donutImagePath',
+                price: 15.0,
+              );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Fav()),
+              );
+            },
+          ),
           //Icono dela derecha
           actions: [
             Padding(

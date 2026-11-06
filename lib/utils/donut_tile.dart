@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:donut_app/utils/cart_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:donut_app/utils/fav_provider.dart';
 
 class DonutTile extends StatelessWidget {
   final String donutFlavor;
@@ -78,7 +79,21 @@ class DonutTile extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.favorite_border_outlined, color: Colors.pink[400]),
+                  IconButton(
+                    icon: Icon(
+                      context.watch<FavProvider>().isFavorite(donutFlavor)
+                          ? Icons.favorite
+                          : Icons.favorite_border_outlined,
+                      color: Colors.pink[400],
+                    ),
+                    onPressed: () {
+                      context.read<FavProvider>().toggleFavorite(
+                        name: donutFlavor,
+                        imagePath: donutImagePath,
+                        price: double.parse(donutPrice),
+                      );
+                    },
+                  ),
                   TextButton(
                     onPressed: () {
                       context.read<CartProvider>().addItem(
