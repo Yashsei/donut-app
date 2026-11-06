@@ -3,6 +3,7 @@ import 'package:donut_app/tab/donut_tab.dart';
 import 'package:donut_app/tab/pancake_tab.dart';
 import 'package:donut_app/tab/pizza_tab.dart';
 import 'package:donut_app/tab/smoothie_tab.dart';
+import 'package:donut_app/screens/cart.dart';
 import 'package:donut_app/utils/my_tab.dart';
 import 'package:flutter/material.dart';
 
@@ -122,7 +123,12 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Cart()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.pink[400],
                     ),
