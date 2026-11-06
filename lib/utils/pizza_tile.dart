@@ -1,3 +1,4 @@
+import 'package:donut_app/utils/fav_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:donut_app/utils/cart_provider.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +58,7 @@ class PizzaTile extends StatelessWidget {
                 ),
               ],
             ),
-            //Imagen de la Dona
+            //Imagen de la Pizza
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
               child: Image.asset(pizzaImagePath),
@@ -78,7 +79,21 @@ class PizzaTile extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.favorite_border_outlined, color: Colors.pink[400]),
+                  IconButton(
+                    icon: Icon(
+                      context.watch<FavProvider>().isFavorite(pizzaFlavor)
+                          ? Icons.favorite
+                          : Icons.favorite_border_outlined,
+                      color: Colors.pink[400],
+                    ),
+                    onPressed: () {
+                      context.read<FavProvider>().toggleFavorite(
+                        name: pizzaFlavor,
+                        imagePath: pizzaImagePath,
+                        price: double.parse(pizzaPrice),
+                      );
+                    },
+                  ),
                   TextButton(
                     onPressed: () {
                       context.read<CartProvider>().addItem(

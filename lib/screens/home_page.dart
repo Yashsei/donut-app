@@ -42,18 +42,8 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.transparent,
           //Icono de la izquierda
           leading: IconButton(
-            icon: Icon(
-              context.watch<FavProvider>().isFavorite('donut')
-                  ? Icons.menu
-                  : Icons.favorite_border_outlined,
-              color: Colors.pink[400],
-            ),
+            icon: Icon(Icons.favorite_border_rounded, color: Colors.pink[400]),
             onPressed: () {
-              context.read<FavProvider>().toggleFavorite(
-                name: 'donutFlavor',
-                imagePath: 'donutImagePath',
-                price: 15.0,
-              );
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const Fav()),

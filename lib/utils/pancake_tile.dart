@@ -1,3 +1,4 @@
+import 'package:donut_app/utils/fav_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:donut_app/utils/cart_provider.dart';
 import 'package:provider/provider.dart';
@@ -78,7 +79,21 @@ class PancakeTile extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.favorite_border_outlined, color: Colors.pink[400]),
+                  IconButton(
+                    icon: Icon(
+                      context.watch<FavProvider>().isFavorite(pancakeFlavor)
+                          ? Icons.favorite
+                          : Icons.favorite_border_outlined,
+                      color: Colors.pink[400],
+                    ),
+                    onPressed: () {
+                      context.read<FavProvider>().toggleFavorite(
+                        name: pancakeFlavor,
+                        imagePath: pancakeImagePath,
+                        price: double.parse(pancakePrice),
+                      );
+                    },
+                  ),
                   TextButton(
                     onPressed: () {
                       context.read<CartProvider>().addItem(
