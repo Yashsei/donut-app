@@ -1,4 +1,5 @@
 import 'package:donut_app/screens/fav.dart';
+import 'package:donut_app/screens/login.dart';
 import 'package:donut_app/tab/burger_tab.dart';
 import 'package:donut_app/tab/donut_tab.dart';
 import 'package:donut_app/tab/pancake_tab.dart';
@@ -6,7 +7,6 @@ import 'package:donut_app/tab/pizza_tab.dart';
 import 'package:donut_app/tab/smoothie_tab.dart';
 import 'package:donut_app/screens/cart.dart';
 import 'package:donut_app/utils/cart_provider.dart';
-import 'package:donut_app/utils/fav_provider.dart';
 import 'package:donut_app/utils/my_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +54,15 @@ class _HomePageState extends State<HomePage> {
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 24.0),
-              child: Icon(Icons.person, color: Colors.grey),
+              child: IconButton(
+                icon: Icon(Icons.person, color: Colors.grey),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Login()),
+                  );
+                },
+              ),
             ),
           ],
         ),
