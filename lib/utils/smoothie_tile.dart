@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:donut_app/utils/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 class SmoothieTile extends StatelessWidget {
   final String smoothieFlavor;
@@ -67,7 +69,7 @@ class SmoothieTile extends StatelessWidget {
             ),
             //Espacio entre textos
             const SizedBox(height: 4),
-            //Nombredel proveedor
+            //Nombre del proveedor
             Text(smoothieProvider, style: TextStyle(color: Colors.grey[1600])),
             //Espacio entre textos
             //Iconos de fav y carrito
@@ -77,12 +79,27 @@ class SmoothieTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Icon(Icons.favorite_border_outlined, color: Colors.pink[400]),
-                  Text(
-                    'Add',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      decoration: TextDecoration.underline,
+                  TextButton(
+                    onPressed: () {
+                      context.read<CartProvider>().addItem(
+                        name: smoothieFlavor,
+                        imagePath: smoothieImagePath,
+                        price: double.parse(smoothiePrice),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('$smoothieFlavor agregado al carrito'),
+                          duration: const Duration(seconds: 1),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Add',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   ),
                 ],
