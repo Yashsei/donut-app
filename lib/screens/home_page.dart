@@ -4,11 +4,13 @@ import 'package:donut_app/tab/pancake_tab.dart';
 import 'package:donut_app/tab/pizza_tab.dart';
 import 'package:donut_app/tab/smoothie_tab.dart';
 import 'package:donut_app/screens/cart.dart';
+import 'package:donut_app/utils/cart_provider.dart';
 import 'package:donut_app/utils/my_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  const new({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -21,11 +23,11 @@ class _HomePageState extends State<HomePage> {
     const MyTab(iconPath: 'assets/icons/donut.png', iconName: 'Donuts'),
     //Burger Tab
     const MyTab(iconPath: 'assets/icons/burger.png', iconName: 'Burgers'),
-    //Smoothies Tab
+    //Pizza Tab
     const MyTab(iconPath: 'assets/icons/pizza.png', iconName: 'Pizza'),
     //PanCakes Tab
     const MyTab(iconPath: 'assets/icons/pancakes.png', iconName: 'Pancakes'),
-    //Pizza Tab
+    //Smoothies Tab
     const MyTab(iconPath: 'assets/icons/smoothie.png', iconName: 'Smoothie'),
   ];
 
@@ -101,15 +103,18 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsGeometry.only(left: 16),
+                    padding: const EdgeInsets.only(left: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '2 items | \$45',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                        // Se actualiza solo cuando cambia el carrito
+                        Consumer<CartProvider>(
+                          builder: (context, cart, child) => Text(
+                            '${cart.totalItems} items | \$${cart.totalPrice.toStringAsFixed(2)}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
                         Text(
