@@ -59,9 +59,11 @@ class BurgerTile extends StatelessWidget {
               ],
             ),
             //Imagen de la Dona
-            Padding(
+            Expanded(
+              child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
               child: Image.asset(burgerImagePath),
+            ),
             ),
             //Nombre de la Dona
             Text(
