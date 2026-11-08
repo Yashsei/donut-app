@@ -100,7 +100,7 @@ class Cart extends StatelessWidget {
                             onPressed: () => cart.addItem(
                               name: item.name,
                               imagePath: item.imagePath,
-                              price: (item.price * item.quantity),
+                              price: item.price,
                             ),
                           ),
                         ],
