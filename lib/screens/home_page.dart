@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
             //1.4 Carrito (Cart)
             Container(
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(18),
                   topRight: Radius.circular(18),
@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                           builder: (context, cart, child) => Text(
                             '${cart.totalItems} items | \$${cart.totalPrice.toStringAsFixed(2)}',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
                             ),

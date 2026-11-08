@@ -69,7 +69,7 @@ class Cart extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  '\$${item.price.toStringAsFixed(2)}',
+                                  '\$${(item.price * item.quantity).toStringAsFixed(2)}',
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,
@@ -100,7 +100,7 @@ class Cart extends StatelessWidget {
                             onPressed: () => cart.addItem(
                               name: item.name,
                               imagePath: item.imagePath,
-                              price: item.price,
+                              price: (item.price * item.quantity),
                             ),
                           ),
                         ],
