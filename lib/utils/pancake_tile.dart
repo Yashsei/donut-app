@@ -58,12 +58,13 @@ class PancakeTile extends StatelessWidget {
                 ),
               ],
             ),
-            //Imagen de la Dona
-            Padding(
+            //Imagen del Pancake
+            Expanded(
+              child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
               child: Image.asset(pancakeImagePath),
             ),
-            //Nombre de la Dona
+            ),
             Text(
               pancakeFlavor,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
