@@ -35,7 +35,9 @@ class _LoginState extends State<Login> {
               focusNode: _userFocusNode,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
-                hintText: 'Usuario',
+                labelText: 'Usuario',
+                labelStyle: TextStyle(color: Colors.white),
+                prefixIcon: const Icon(Icons.person_outline_sharp),
                 enabledBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(12),
@@ -53,7 +55,8 @@ class _LoginState extends State<Login> {
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 errorText: passError,
-                hintText: 'Password',
+                labelText: 'Password',
+                labelStyle: TextStyle(color: Colors.white),
                 prefixIcon: const Icon(Icons.lock_clock_rounded),
                 suffixIcon: IconButton(
                   icon: Icon(
