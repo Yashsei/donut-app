@@ -62,91 +62,93 @@ class _LoginState extends State<Login> {
           style: TextStyle(fontSize: 28, color: Colors.white),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 5),
-            Padding(
-              padding: EdgeInsetsGeometry.symmetric(horizontal: 24),
-              child: Image.asset('assets/images/logo.png'),
-            ),
-            TextField(
-              controller: _userController,
-              focusNode: _userFocusNode,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                errorText: userError,
-                labelText: 'Usuario',
-                labelStyle: TextStyle(color: Colors.white),
-                prefixIcon: const Icon(Icons.person_outline_sharp),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.pink),
-                  borderRadius: BorderRadius.circular(12),
-                ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 5),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Image.asset('assets/images/logo.png'),
               ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _passController,
-              focusNode: _passwordFocusNode,
-              obscureText: _obscureText,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                errorText: passError,
-                labelText: 'Password',
-                labelStyle: TextStyle(color: Colors.white),
-                prefixIcon: const Icon(Icons.lock_clock_rounded),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _obscureText
-                        ? Icons.visibility_outlined
-                        : Icons.visibility_off_outlined,
+              TextField(
+                controller: _userController,
+                focusNode: _userFocusNode,
+                style: const TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  errorText: userError,
+                  labelText: 'Usuario',
+                  labelStyle: TextStyle(color: Colors.white),
+                  prefixIcon: const Icon(Icons.person_outline_sharp),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  onPressed: () {
-                    setState(() {
-                      _obscureText = !_obscureText;
-                    });
-                  },
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.pink),
-                  borderRadius: BorderRadius.circular(12),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.pink),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: _onLogin,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.pink,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 48,
-                  vertical: 16,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+              const SizedBox(height: 16),
+              TextField(
+                controller: _passController,
+                focusNode: _passwordFocusNode,
+                obscureText: _obscureText,
+                style: const TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  errorText: passError,
+                  labelText: 'Password',
+                  labelStyle: TextStyle(color: Colors.white),
+                  prefixIcon: const Icon(Icons.lock_clock_rounded),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureText
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.pink),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
-              child: const Text(
-                'Login',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: _onLogin,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.pink,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 48,
+                    vertical: 16,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text(
+                  'Login',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
