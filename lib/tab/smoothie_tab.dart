@@ -27,6 +27,34 @@ class SmoothieTab extends StatelessWidget {
       "assets/images/JungleFresh.png",
       'Italian Coffe',
     ],
+    [
+      'Berry Blast',
+      '80',
+      Colors.pink,
+      "assets/images/berry_blast.png",
+      'Tim Hortons',
+    ],
+    [
+      'Green Detox',
+      '75',
+      Colors.green,
+      "assets/images/green_detox.png",
+      'Oxxo',
+    ],
+    [
+      'Peach Paradise',
+      '88',
+      Colors.orange,
+      "assets/images/peach_paradise.png",
+      'Vips',
+    ],
+    [
+      'Chai Vanilla',
+      '92',
+      Colors.amber,
+      "assets/images/chai_vanilla.png",
+      'Denny\'s',
+    ],
   ];
 
   @override

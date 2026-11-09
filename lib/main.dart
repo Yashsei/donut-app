@@ -1,3 +1,4 @@
+import 'package:donut_app/screens/login.dart';
 import 'package:donut_app/utils/cart_provider.dart';
 import 'package:donut_app/utils/fav_provider.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +24,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: const HomePage(),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
+      home: const Login(),
       debugShowCheckedModeBanner: false,
     );
   }

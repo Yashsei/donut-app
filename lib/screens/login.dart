@@ -1,3 +1,4 @@
+import 'package:donut_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -41,7 +42,10 @@ class _LoginState extends State<Login> {
       passError = pError;
     });
     if (uError == null && pError == null) {
-      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
     }
   }
 
@@ -63,6 +67,11 @@ class _LoginState extends State<Login> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 5),
+            Padding(
+              padding: EdgeInsetsGeometry.symmetric(horizontal: 24),
+              child: Image.asset('assets/images/logo.png'),
+            ),
             TextField(
               controller: _userController,
               focusNode: _userFocusNode,

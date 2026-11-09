@@ -35,6 +35,20 @@ class PancakeTab extends StatelessWidget {
       'assets/images/matchamagic.png',
       'Starbucks',
     ],
+    [
+      'Stawberry & Coco',
+      '80',
+      Colors.pink,
+      "assets/images/strawcoco.png",
+      'Vips',
+    ],
+    [
+      'Caramel Pecan',
+      '110',
+      Colors.orange,
+      "assets/images/caramel.png",
+      'Denny\'s',
+    ],
   ];
 
   @override
