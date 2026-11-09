@@ -30,6 +30,40 @@ class Cart extends StatelessWidget {
           }
           return Column(
             children: [
+              SizedBox(height: 10),
+              Padding(
+                padding: EdgeInsets.only(top: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsGeometry.only(left: 24),
+                      child: Text(
+                        'Your cart',
+                        style: TextStyle(color: Colors.white, fontSize: 24),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsGeometry.only(top: 8, left: 24),
+                    child: Consumer<CartProvider>(
+                      builder: (context, cart, child) => Text(
+                        '${cart.totalItems} Items in Your cart',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               Expanded(
                 child: ListView.builder(
                   padding: const EdgeInsets.all(18),
