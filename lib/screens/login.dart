@@ -1,18 +1,50 @@
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
-  const new({super.key});
+  const Login({super.key});
 
   @override
   State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  String? passError;
-  String? userError;
   bool _obscureText = true;
   final _userFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
+
+  final _userController = TextEditingController();
+  final _passController = TextEditingController();
+
+  String? passError;
+  String? userError;
+
+  bool isValidUser(String user) {
+    final re = RegExp(r'^[A-Za-z]{4,}$');
+    return re.hasMatch(user);
+  }
+
+  bool isValidPassword(String pass) {
+    final re = RegExp(
+      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$',
+    );
+    return re.hasMatch(pass);
+  }
+
+  void _onLogin() {
+    final user = _userController.text.trim();
+    final pass = _passController.text.trim();
+
+    final uError = isValidUser(user) ? null : 'Usuario Invalido';
+    final pError = isValidPassword(pass) ? null : 'Contraseña Invalida';
+    setState(() {
+      userError = uError;
+      passError = pError;
+    });
+    if (uError == null && pError == null) {
+      Navigator.pop(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,9 +64,11 @@ class _LoginState extends State<Login> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+              controller: _userController,
               focusNode: _userFocusNode,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
+                errorText: userError,
                 labelText: 'Usuario',
                 labelStyle: TextStyle(color: Colors.white),
                 prefixIcon: const Icon(Icons.person_outline_sharp),
@@ -50,6 +84,7 @@ class _LoginState extends State<Login> {
             ),
             const SizedBox(height: 16),
             TextField(
+              controller: _passController,
               focusNode: _passwordFocusNode,
               obscureText: _obscureText,
               style: const TextStyle(color: Colors.white),
@@ -82,9 +117,7 @@ class _LoginState extends State<Login> {
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: _onLogin,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.pink,
                 padding: const EdgeInsets.symmetric(
