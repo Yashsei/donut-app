@@ -20,6 +20,28 @@ class PizzaTab extends StatelessWidget {
       "Don Queso",
     ],
     ['Champizza', '70', Colors.purple, "assets/images/champ.png", 'Messinas'],
+    [
+      'Extra Extra',
+      '115',
+      Colors.amberAccent,
+      'assets/images/extraextra.png',
+      'Little Ceasars',
+    ],
+    [
+      'Jalapeño Boom',
+      '120',
+      Colors.green,
+      'assets/images/jalapeño.png',
+      'Dominos',
+    ],
+    [
+      'Pastor Special',
+      '165',
+      Colors.deepOrange,
+      'assets/images/pastor.png',
+      'Mixes',
+    ],
+    ['Mixza', '170', Colors.lightBlue, 'assets/images/mix.png', 'Messinas'],
   ];
   @override
   Widget build(BuildContext context) {

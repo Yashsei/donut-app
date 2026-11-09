@@ -28,6 +28,34 @@ class DonutTab extends StatelessWidget {
       "Dunkin' Donuts",
     ],
     ['Grape', '70', Colors.purple, "assets/images/grape_donut.png", 'Oxxo'],
+    [
+      'Glass Donut',
+      '110',
+      Colors.grey,
+      'assets/images/glassdonut.png',
+      'Krispy Cream',
+    ],
+    [
+      'Green power',
+      '80',
+      Colors.green,
+      'assets/images/donutpepino.png',
+      'Oxxo',
+    ],
+    [
+      'Fresh Donut',
+      '85',
+      Colors.lightBlue,
+      'assets/images/freshdonut.png',
+      'Dunkin Donuts',
+    ],
+    [
+      'Classic',
+      '65',
+      Colors.yellow,
+      'assets/images/classicdonut.png',
+      'Starbucks',
+    ],
   ];
 
   @override

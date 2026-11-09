@@ -7,26 +7,54 @@ class BurgerTab extends StatelessWidget {
   final List burgerOnSale = [
     [
       'Cheese Burger',
-      '120',
+      '100',
       Colors.brown,
       "assets/images/cheeseburger.png",
       'Burger King',
     ],
     [
-      'Simple Burger',
-      '89',
+      'Fresh Burger',
+      '95',
       Colors.red,
       "assets/images/simpleburger.webp",
       'Carls Junior',
     ],
     [
       'Cangre Burger',
-      '95',
+      '110',
       Colors.blue,
       "assets/images/cangreburger.png",
       "Crustaceo Cascarudo",
     ],
-    ['Big Mac', '70', Colors.purple, "assets/images/BigMac.png", 'MC Donalds'],
+    ['Big Mac', '120', Colors.purple, "assets/images/BigMac.png", 'MC Donalds'],
+    [
+      'Classic',
+      '85',
+      Colors.green,
+      'assets/images/classicburger.png',
+      'Burger King',
+    ],
+    [
+      'Beacon Special',
+      '100',
+      Colors.deepOrangeAccent,
+      'assets/images/beacon.png',
+      'Burger King',
+    ],
+    [
+      'Jumbo Burger',
+      '125',
+      Colors.grey,
+      'assets/images/jumbo.png',
+      'MC Donalds',
+    ],
+    [
+      'Triple Burger',
+      '150',
+      Colors.red,
+      'assets/images/tripleburger.png',
+      'Subway',
+    ],
   ];
 
   @override

@@ -27,6 +27,14 @@ class PancakeTab extends StatelessWidget {
       "assets/images/pancaketower.png",
       'Oxxo',
     ],
+    ['Blue Dream', '89', Colors.indigo, 'assets/images/bluedream.png', 'IHop'],
+    [
+      'Matcha Magic',
+      '93',
+      Colors.green,
+      'assets/images/matchamagic.png',
+      'Starbucks',
+    ],
   ];
 
   @override
