@@ -1,4 +1,4 @@
-import 'package:donut_app/screens/login.dart';
+import 'package:donut_app/screens/cloudscreen.dart';
 import 'package:donut_app/utils/cart_provider.dart';
 import 'package:donut_app/utils/fav_provider.dart';
 import 'package:flutter/material.dart';
@@ -25,14 +25,16 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Donut App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const Login(),
+      // 2. Corrección de la pantalla inicial a CloudScreen
+      home: const CloudScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
