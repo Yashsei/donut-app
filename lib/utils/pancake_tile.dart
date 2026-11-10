@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class PancakeTile extends StatelessWidget {
   final String pancakeFlavor;
   final String pancakePrice;
-  final dynamic pancakeColor;
+  final Color? pancakeColor;
   final String pancakeImagePath;
   final String pancakeProvider;
 
@@ -25,7 +25,7 @@ class PancakeTile extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: Container(
         decoration: BoxDecoration(
-          color: pancakeColor[100],
+          color: (pancakeColor ?? Colors.grey).withValues(alpha: 0.25),
           borderRadius: BorderRadius.circular(24.0),
         ),
         child: Column(
@@ -41,7 +41,9 @@ class PancakeTile extends StatelessWidget {
                     horizontal: 18.0,
                   ),
                   decoration: BoxDecoration(
-                    color: pancakeColor[200],
+                    color: (pancakeColor ?? Colors.grey).withValues(
+                      alpha: 0.25,
+                    ),
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(24),
                       bottomLeft: Radius.circular(24),
@@ -52,7 +54,9 @@ class PancakeTile extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      color: pancakeColor[800],
+                      color: HSLColor.fromColor(pancakeColor ?? Colors.grey)
+                          .withLightness(0.35)
+                          .toColor(),
                     ),
                   ),
                 ),
@@ -65,7 +69,15 @@ class PancakeTile extends StatelessWidget {
                   vertical: 12,
                   horizontal: 24,
                 ),
-                child: Image.network(pancakeImagePath),
+                child: Image.network(
+                  pancakeImagePath,
+                  fit: BoxFit.cover,
+                  cacheWidth: 400,
+                  errorBuilder: (context, error, stackTrace) {
+                    debugPrint('Error cargando imagen: $error');
+                    return const Icon(Icons.broken_image, size: 48);
+                  },
+                ),
               ),
             ),
             Text(

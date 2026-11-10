@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class BurgerTile extends StatelessWidget {
   final String burgerFlavor;
   final String burgerPrice;
-  final dynamic burgerColor;
+  final Color? burgerColor;
   final String burgerImagePath;
   final String burgerProvider;
 
@@ -25,7 +25,7 @@ class BurgerTile extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: Container(
         decoration: BoxDecoration(
-          color: burgerColor[100],
+          color: (burgerColor ?? Colors.grey).withValues(alpha: 0.25),
           borderRadius: BorderRadius.circular(24.0),
         ),
         child: Column(
@@ -41,7 +41,7 @@ class BurgerTile extends StatelessWidget {
                     horizontal: 18.0,
                   ),
                   decoration: BoxDecoration(
-                    color: burgerColor[200],
+                    color: (burgerColor ?? Colors.grey).withValues(alpha: 0.25),
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(24),
                       bottomLeft: Radius.circular(24),
@@ -52,7 +52,9 @@ class BurgerTile extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      color: burgerColor[800],
+                      color: HSLColor.fromColor(burgerColor ?? Colors.grey)
+                          .withLightness(0.35)
+                          .toColor(),
                     ),
                   ),
                 ),
@@ -65,7 +67,15 @@ class BurgerTile extends StatelessWidget {
                   vertical: 12,
                   horizontal: 24,
                 ),
-                child: Image.network(burgerImagePath),
+                child: Image.network(
+                  burgerImagePath,
+                  fit: BoxFit.cover,
+                  cacheWidth: 400,
+                  errorBuilder: (context, error, stackTrace) {
+                    debugPrint('Error cargando imagen: $error');
+                    return const Icon(Icons.broken_image, size: 48);
+                  },
+                ),
               ),
             ),
             //Nombre de la Dona

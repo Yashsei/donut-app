@@ -1,75 +1,48 @@
+import 'package:donut_app/services/products_services.dart';
+import 'package:donut_app/utils/colors.dart';
 import 'package:donut_app/utils/pizza_tile.dart';
 import 'package:flutter/material.dart';
 
 class PizzaTab extends StatelessWidget {
-  PizzaTab({super.key});
-  final List pizzaOnSale = [
-    ['Pizza', '100', Colors.brown, "assets/images/pizzapep.png", 'Dominos'],
-    [
-      'Pizza Hawaiana',
-      '89',
-      Colors.red,
-      "assets/images/hawaiana.webp",
-      'Pizza Hut',
-    ],
-    [
-      'Pizza Italiana',
-      '95',
-      Colors.blue,
-      "assets/images/Italiana.webp",
-      "Don Queso",
-    ],
-    ['Champizza', '70', Colors.purple, "assets/images/champ.png", 'Messinas'],
-    [
-      'Extra Extra',
-      '115',
-      Colors.amberAccent,
-      'assets/images/extraextra.png',
-      'Little Ceasars',
-    ],
-    [
-      'Jalapeño Boom',
-      '120',
-      Colors.green,
-      'assets/images/jalapeño.png',
-      'Dominos',
-    ],
-    [
-      'Pastor Special',
-      '165',
-      Colors.deepOrange,
-      'assets/images/pastor.png',
-      'Mixes',
-    ],
-    ['Mixza', '170', Colors.lightBlue, 'assets/images/mix.png', 'Messinas'],
-  ];
+  const PizzaTab({super.key});
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final width = constraints.maxWidth;
+    return FutureBuilder<List>(
+      future: getProducts('pizza'),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        }
 
-        final crossAxisCount = width >= 900 ? 4 : (width >= 600 ? 3 : 2);
+        final products = snapshot.data!;
 
-        final tileWidth = width / crossAxisCount;
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            final width = constraints.maxWidth;
+            final crossAxisCount = width >= 900 ? 4 : (width >= 600 ? 3 : 2);
+            final tileWidth = width / crossAxisCount;
+            final imageSize = tileWidth - 72;
+            const fixedContentHeight = 215.0;
 
-        final imageSize = tileWidth - 72;
-
-        const fixedContentHeight = 215.0;
-
-        return GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: crossAxisCount,
-            mainAxisExtent: imageSize + fixedContentHeight,
-          ),
-          itemCount: pizzaOnSale.length,
-          itemBuilder: (context, index) {
-            return PizzaTile(
-              pizzaFlavor: pizzaOnSale[index][0],
-              pizzaPrice: pizzaOnSale[index][1],
-              pizzaColor: pizzaOnSale[index][2],
-              pizzaImagePath: pizzaOnSale[index][3],
-              pizzaProvider: pizzaOnSale[index][4],
+            return GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                mainAxisExtent: imageSize + fixedContentHeight,
+              ),
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final p = products[index];
+                return PizzaTile(
+                  pizzaFlavor: p['flavor'] ?? 'Sin nombre',
+                  pizzaPrice: p['price'].toString(),
+                  pizzaColor: hexToColor(p['color']),
+                  pizzaImagePath: p['image_urls'][0],
+                  pizzaProvider: p['provider'] ?? 'Desconocido',
+                );
+              },
             );
           },
         );

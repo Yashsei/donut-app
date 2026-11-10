@@ -75,11 +75,11 @@ class DonutTile extends StatelessWidget {
                     return Image.network(
                       donutImagePath,
                       fit: BoxFit.cover,
-                      loadingBuilder: (context, child, progress) {
-                        if (progress == null) return child;
-                        return const Center(child: CircularProgressIndicator());
+                      cacheWidth: 400,
+                      errorBuilder: (context, error, stackTrace) {
+                        debugPrint('Error cargando imagen: $error');
+                        return const Icon(Icons.broken_image, size: 48);
                       },
-                      height: 100,
                     );
                   },
                 ),

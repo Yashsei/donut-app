@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class SmoothieTile extends StatelessWidget {
   final String smoothieFlavor;
   final String smoothiePrice;
-  final dynamic smoothieColor;
+  final Color? smoothieColor;
   final String smoothieImagePath;
   final String smoothieProvider;
 
@@ -25,7 +25,7 @@ class SmoothieTile extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: Container(
         decoration: BoxDecoration(
-          color: smoothieColor[100],
+          color: (smoothieColor ?? Colors.grey).withValues(alpha: 0.25),
           borderRadius: BorderRadius.circular(24.0),
         ),
         child: Column(
@@ -41,7 +41,9 @@ class SmoothieTile extends StatelessWidget {
                     horizontal: 18.0,
                   ),
                   decoration: BoxDecoration(
-                    color: smoothieColor[200],
+                    color: (smoothieColor ?? Colors.grey).withValues(
+                      alpha: 0.25,
+                    ),
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(24),
                       bottomLeft: Radius.circular(24),
@@ -52,7 +54,9 @@ class SmoothieTile extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      color: smoothieColor[800],
+                      color: HSLColor.fromColor(smoothieColor ?? Colors.grey)
+                          .withLightness(0.35)
+                          .toColor(),
                     ),
                   ),
                 ),
@@ -65,7 +69,15 @@ class SmoothieTile extends StatelessWidget {
                   vertical: 12,
                   horizontal: 24,
                 ),
-                child: Image.network(smoothieImagePath),
+                child: Image.network(
+                  smoothieImagePath,
+                  fit: BoxFit.cover,
+                  cacheWidth: 400,
+                  errorBuilder: (context, error, stackTrace) {
+                    debugPrint('Error cargando imagen: $error');
+                    return const Icon(Icons.broken_image, size: 48);
+                  },
+                ),
               ),
             ),
             //Nombre de la Dona
