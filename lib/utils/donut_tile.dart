@@ -6,7 +6,7 @@ import 'package:donut_app/utils/fav_provider.dart';
 class DonutTile extends StatelessWidget {
   final String donutFlavor;
   final String donutPrice;
-  final dynamic donutColor;
+  final Color? donutColor;
   final String donutImagePath;
   final String donutProvider;
 
@@ -25,7 +25,7 @@ class DonutTile extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: Container(
         decoration: BoxDecoration(
-          color: donutColor[100],
+          color: (donutColor ?? Colors.grey).withValues(alpha: 0.25),
           borderRadius: BorderRadius.circular(24.0),
         ),
         child: Column(
@@ -41,7 +41,7 @@ class DonutTile extends StatelessWidget {
                     horizontal: 18.0,
                   ),
                   decoration: BoxDecoration(
-                    color: donutColor[200],
+                    color: (donutColor ?? Colors.grey).withValues(alpha: 0.25),
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(24),
                       bottomLeft: Radius.circular(24),
@@ -52,7 +52,9 @@ class DonutTile extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      color: donutColor[800],
+                      color: HSLColor.fromColor(donutColor ?? Colors.grey)
+                          .withLightness(0.35)
+                          .toColor(),
                     ),
                   ),
                 ),
@@ -65,7 +67,22 @@ class DonutTile extends StatelessWidget {
                   vertical: 12,
                   horizontal: 24,
                 ),
-                child: Image.asset(donutImagePath),
+                child: Image.network(
+                  donutImagePath,
+                  height: 100, // Ajusta a tu diseño
+                  errorBuilder: (context, error, stackTrace) {
+                    // Imagen de respaldo local si no hay internet o falla la URL
+                    return Image.network(
+                      donutImagePath,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, progress) {
+                        if (progress == null) return child;
+                        return const Center(child: CircularProgressIndicator());
+                      },
+                      height: 100,
+                    );
+                  },
+                ),
               ),
             ),
             //Nombre de la Dona

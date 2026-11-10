@@ -61,9 +61,12 @@ class PancakeTile extends StatelessWidget {
             //Imagen del Pancake
             Expanded(
               child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-              child: Image.asset(pancakeImagePath),
-            ),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 24,
+                ),
+                child: Image.network(pancakeImagePath),
+              ),
             ),
             Text(
               pancakeFlavor,

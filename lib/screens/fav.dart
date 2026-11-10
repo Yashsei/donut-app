@@ -46,7 +46,7 @@ class Fav extends StatelessWidget {
                       padding: const EdgeInsets.all(12),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
-                        child: Image.asset(
+                        child: Image.network(
                           item.imagePath,
                           width: 64,
                           height: 64,

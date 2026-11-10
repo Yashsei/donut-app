@@ -61,9 +61,12 @@ class PizzaTile extends StatelessWidget {
             //Imagen de la Pizza
             Expanded(
               child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-              child: Image.asset(pizzaImagePath),
-            ),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 24,
+                ),
+                child: Image.network(pizzaImagePath),
+              ),
             ),
             //Nombre de la Dona
             Text(

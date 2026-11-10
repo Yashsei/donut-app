@@ -61,9 +61,12 @@ class SmoothieTile extends StatelessWidget {
             //Imagen de la Dona
             Expanded(
               child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-              child: Image.asset(smoothieImagePath),
-            ),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 24,
+                ),
+                child: Image.network(smoothieImagePath),
+              ),
             ),
             //Nombre de la Dona
             Text(
