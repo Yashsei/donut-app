@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:donut_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -18,6 +22,26 @@ class _LoginState extends State<Login> {
 
   String? passError;
   String? userError;
+
+  @override
+  void initState() {
+    super.initState();
+    _limpiarSesion();
+  }
+
+  Future<void> _limpiarSesion() async {
+    await Supabase.instance.client.auth.signOut();
+    await GoogleSignIn().signOut();
+  }
+
+  @override
+  void dispose() {
+    _userController.dispose();
+    _passController.dispose();
+    _userFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
+  }
 
   bool isValidUser(String user) {
     final re = RegExp(r'^[A-Za-z]{4,}$');
@@ -49,6 +73,46 @@ class _LoginState extends State<Login> {
     }
   }
 
+  Future<void> _signInWithGoogleNative() async {
+    try {
+      const webClientId =
+          '729148621857-ei54ej5bcav7o4hspo4p2e2k2e7o2pnn.apps.googleusercontent.com';
+
+      final GoogleSignIn googleSignIn = GoogleSignIn(
+        serverClientId: webClientId,
+      );
+
+      final googleUser = await googleSignIn.signIn();
+      if (googleUser == null) return;
+
+      final googleAuth = await googleUser.authentication;
+      final idToken = googleAuth.idToken;
+      final accessToken = googleAuth.accessToken;
+
+      if (idToken == null) {
+        throw 'No se pudo generar el idToken de Google.';
+      }
+
+      await Supabase.instance.client.auth.signInWithIdToken(
+        provider: OAuthProvider.google,
+        idToken: idToken,
+        accessToken: accessToken,
+      );
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const HomePage()),
+        );
+      }
+    } catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error al iniciar sesión: $error')),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +134,7 @@ class _LoginState extends State<Login> {
             children: [
               const SizedBox(height: 5),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Image.asset('assets/images/logo.png'),
               ),
               TextField(
@@ -80,7 +144,7 @@ class _LoginState extends State<Login> {
                 decoration: InputDecoration(
                   errorText: userError,
                   labelText: 'Usuario',
-                  labelStyle: TextStyle(color: Colors.white),
+                  labelStyle: const TextStyle(color: Colors.white),
                   prefixIcon: const Icon(Icons.person_outline_sharp),
                   enabledBorder: OutlineInputBorder(
                     borderSide: const BorderSide(color: Colors.white),
@@ -101,7 +165,7 @@ class _LoginState extends State<Login> {
                 decoration: InputDecoration(
                   errorText: passError,
                   labelText: 'Password',
-                  labelStyle: TextStyle(color: Colors.white),
+                  labelStyle: const TextStyle(color: Colors.white),
                   prefixIcon: const Icon(Icons.lock_clock_rounded),
                   suffixIcon: IconButton(
                     icon: Icon(
@@ -144,6 +208,31 @@ class _LoginState extends State<Login> {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text('o', style: TextStyle(color: Colors.white70)),
+              const SizedBox(height: 16),
+              OutlinedButton.icon(
+                onPressed: _signInWithGoogleNative,
+                icon: const Icon(
+                  Icons.g_mobiledata_outlined,
+                  size: 30,
+                  color: Colors.white,
+                ),
+                label: const Text(
+                  'Login',
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: Colors.white),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 14,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
               ),

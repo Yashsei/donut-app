@@ -1,4 +1,4 @@
-import 'package:donut_app/screens/cloudscreen.dart';
+import 'package:donut_app/screens/login.dart';
 import 'package:donut_app/utils/cart_provider.dart';
 import 'package:donut_app/utils/fav_provider.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const CloudScreen(),
+      home: const Login(),
       debugShowCheckedModeBanner: false,
     );
   }
