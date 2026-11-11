@@ -7,10 +7,15 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Supabase.initialize(
-    url: 'https://jqfavnfihhhuqjqtmvgq.supabase.co',
-    publishableKey: 'sb_publishable_6fVEizpS6kAF3hdvikVk8w_QpmBoT1H',
-  );
+
+  try {
+    await Supabase.initialize(
+      url: 'https://jqfavnfihhhuqjqtmvgq.supabase.co',
+      publishableKey: 'sb_publishable_6fVEizpS6kAF3hdvikVk8w_QpmBoT1H',
+    );
+  } catch (e) {
+    debugPrint('Error al inicializar Supabase: $e');
+  }
 
   runApp(
     MultiProvider(
@@ -33,7 +38,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      // 2. Corrección de la pantalla inicial a CloudScreen
       home: const CloudScreen(),
       debugShowCheckedModeBanner: false,
     );

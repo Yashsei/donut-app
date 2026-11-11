@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:donut_app/screens/login.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CloudScreen extends StatefulWidget {
@@ -17,7 +18,6 @@ class _CloudScreenState extends State<CloudScreen> {
   @override
   void initState() {
     super.initState();
-    // Escucha el cambio de estado de autenticación cuando regresa de Google
     _authSubscription = Supabase.instance.client.auth.onAuthStateChange.listen((
       data,
     ) {
@@ -37,21 +37,35 @@ class _CloudScreenState extends State<CloudScreen> {
     super.dispose();
   }
 
-  Future<void> _check() async {
-    // Sustituye 'products' por el nombre real de tu tabla en Supabase
-    await Supabase.instance.client.from('products').select().limit(1);
-  }
-
-  Future<void> _signInWithGoogle() async {
+  Future<void> _signInWithGoogleNative() async {
     try {
-      await Supabase.instance.client.auth.signInWithOAuth(
-        OAuthProvider.google,
-        redirectTo: 'io.supabase.flutter://login-callback',
+      const webClientId =
+          '729148621857-ei54ej5bcav7o4hspo4p2e2k2e7o2pnn.apps.googleusercontent.com';
+
+      final GoogleSignIn googleSignIn = GoogleSignIn(
+        serverClientId: webClientId,
+      );
+
+      final googleUser = await googleSignIn.signIn();
+      if (googleUser == null) return;
+
+      final googleAuth = await googleUser.authentication;
+      final idToken = googleAuth.idToken;
+      final accessToken = googleAuth.accessToken;
+
+      if (idToken == null) {
+        throw 'No se pudo generar el idToken de Google.';
+      }
+
+      await Supabase.instance.client.auth.signInWithIdToken(
+        provider: OAuthProvider.google,
+        idToken: idToken,
+        accessToken: accessToken,
       );
     } catch (error) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error de autenticación: $error')),
+          SnackBar(content: Text('Error al iniciar sesión: $error')),
         );
       }
     }
@@ -59,58 +73,15 @@ class _CloudScreenState extends State<CloudScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<void>(
-      future: _check(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          );
-        }
-        if (snapshot.hasError) {
-          return Scaffold(
-            body: Center(child: Text('❌ Error de conexión: ${snapshot.error}')),
-          );
-        }
-
-        return Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.cloud_done, color: Colors.green, size: 64),
-                const SizedBox(height: 8),
-                const Text(
-                  'Conectado a Supabase',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 24),
-                // Botón principal de login con Google
-                ElevatedButton.icon(
-                  onPressed: _signInWithGoogle,
-                  icon: const Icon(Icons.g_mobiledata, size: 32),
-                  label: const Text('Iniciar sesión con Google'),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 12,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                // Opción secundaria para continuar manualmente
-                TextButton(
-                  onPressed: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (_) => const Login()),
-                  ),
-                  child: const Text('Continuar a Login manual'),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+    return Scaffold(
+      appBar: AppBar(title: const Text('Conexión Supabase')),
+      body: Center(
+        child: ElevatedButton.icon(
+          onPressed: _signInWithGoogleNative,
+          icon: const Icon(Icons.g_mobiledata, size: 30),
+          label: const Text('Iniciar sesión con Google'),
+        ),
+      ),
     );
   }
 }
